@@ -1,0 +1,104 @@
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #282A36;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", serif;
+}
+
+.container{
+    width: 100%;
+    max-width: 900px;
+    padding: 3rem;
+    border-radius: 20px;
+
+}
+
+.heading{
+    font-family: "Protest Guerrilla", serif;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 0 0 3px #FEEC37;
+    color: #44475A;
+    margin-bottom: 2rem;
+}
+
+.result-div{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem .5rem;
+}
+
+.result-div p{
+    font-size: 1.15rem;
+    color: #86E0F3;
+}
+
+.inner{
+    background-color: #44475A;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+.inner-text{
+    color: rgb(158, 150, 135);
+    text-transform: lowercase;
+    font-size: 1.15rem;
+    padding: .5rem;
+    text-align: justify;
+    line-height: 2rem;
+}
+
+.button-div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem 0 .5rem 0;
+}
+
+.mistake{
+    color: #86E0F3;
+}
+
+.mistake-value{
+    color: #D2042D;
+}
+
+.timer{
+    color: #D7D853;
+    border: 1px solid #D7D853;
+    border-radius: 30px;
+    padding: .25rem;
+}
+
+.restart-button{
+    background-color: #282A36;
+    border: none;
+    font-size: 2rem;
+    padding: .5rem;
+    border-radius: 100px;
+    color: white;
+}
+
+.restart-button:active {
+    scale: .95;
+}
+
+
+.green{
+    color: #06D001;
+}
+
+.red{
+    color: #cb3439;
+    background: #ffc0cb;
+    border-radius: 5px;
+}
