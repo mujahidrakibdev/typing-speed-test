@@ -25,20 +25,24 @@ const paragraphs = [
 const restartButton = document.querySelector(".restart-button")
 const text = document.querySelector(".inner-text")
 const inputField = document.querySelector(".input-field")
+const mistakeValue = document.querySelector(".mistake-value")
+const timerdiv = document.querySelector(".timer")
+const wpmValue = document.querySelector(".wpm-value")
+const cpmValue = document.querySelector(".cpm-value")
 
 
-let charIndex = 0
+let charIndex = cpm = wpm = mistake = 0, isTyping = false, timeLeft = 60, timer
 
 
 
 
 
 
-restartButton.addEventListener("click", changeParagraph)
+restartButton.addEventListener("click", resetGame)
 
 function changeParagraph() {
     let randIndex = Math.floor(Math.random() * paragraphs.length)
-
+    text.innerHTML = ""
     paragraphs[randIndex].split("").forEach(letter => {
         const spanTag = `<span>${letter}</span>`
         text.innerHTML += spanTag
@@ -57,15 +61,76 @@ inputField.addEventListener("input", typing)
 function typing() {
     const letters = text.querySelectorAll("span")
     const letter = letters[charIndex]
-    
-    let typedChar = inputField.value.split("")[charIndex]
-    
+    const typedChar = inputField.value.split("")[charIndex]
 
-    if (letter.innerText === typedChar) {
-        letter.classList.add("green")
-    } else {
-        letter.classList.add("red")
+
+    if (charIndex < letters.length - 1 && timeLeft > 0) {
+        if (!isTyping) {
+            timer = setInterval(() => {
+                console.log("running")
+                if (timeLeft > 0) {
+                    timeLeft--
+                    timerdiv.innerText = `${timeLeft}s`
+                } else {
+                    clearInterval(timer)
+                }
+                
+        
+            }, 1000);
+            isTyping = true
+        }
+        
+        
+        if (typedChar == null) {
+            charIndex--
+            if (letters[charIndex].classList.contains("red")) {
+                mistake--
+                mistakeValue.innerText = mistake
+            }
+            letters[charIndex].classList.remove("green", "red")
+            addUnderline(letters)
+            return
+            
+        } else{
+            if (letter.innerText === typedChar) {
+                letter.classList.add("green")
+            } else {
+                mistake++
+                letter.classList.add("red")
+            }
+        }
+    
+        charIndex++
+        addUnderline(letters)
+        mistakeValue.innerText = mistake
+    
+        cpm = charIndex - mistake
+        cpmValue.innerText = cpm
+    
+        wpm = Math.round(((cpm / 8) / (60 - timeLeft)) * 60)
+        wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm
+        wpmValue.innerText = wpm
+    } else{
+        inputField.value = ""
+        clearInterval(timer)
     }
 
-    charIndex++
+
+}
+
+function addUnderline(letters) {
+    letters.forEach(letter => letter.classList.remove("underline"))
+    letters[charIndex].classList.add("underline")
+}
+
+function resetGame() {
+    changeParagraph()
+    inputField.value = ""
+    clearInterval(timer)
+    timeLeft = 60
+    timerdiv.innerText = "60s"
+    cpmValue.innerText = 0
+    wpmValue.innerText = 0
+    mistakeValue.innerText = 0
+    charIndex = cpm = wpm = mistake = 0, isTyping = false
 }

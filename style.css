@@ -55,6 +55,12 @@ body{
     padding: .5rem;
     text-align: justify;
     line-height: 2rem;
+    letter-spacing: 2.5px;
+    word-break: break-all;
+}
+
+.inner-text span{
+    position: relative;
 }
 
 .button-div{
@@ -101,4 +107,24 @@ body{
     color: #cb3439;
     background: #ffc0cb;
     border-radius: 5px;
+}
+
+.underline{
+    color: #17a2b8;
+}
+
+.underline::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: #17a2b8;
+    animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+     50%{opacity: 0;}
+     100%{opacity: 1;}
 }
