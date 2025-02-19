@@ -29,9 +29,10 @@ const mistakeValue = document.querySelector(".mistake-value")
 const timerdiv = document.querySelector(".timer")
 const wpmValue = document.querySelector(".wpm-value")
 const cpmValue = document.querySelector(".cpm-value")
+const accuracyValue = document.querySelector(".accuracy")
 
 
-let charIndex = cpm = wpm = mistake = 0, isTyping = false, timeLeft = 60, timer
+let charIndex = cpm = wpm = mistake = accuracy = 0, isTyping = false, timeLeft = 60, timer
 
 
 
@@ -110,6 +111,10 @@ function typing() {
         wpm = Math.round(((cpm / 8) / (60 - timeLeft)) * 60)
         wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm
         wpmValue.innerText = wpm
+
+        accuracy = Math.round((cpm / (cpm + mistake) ) * 100)
+        accuracyValue.innerText = `${accuracy}%`
+
     } else{
         inputField.value = ""
         clearInterval(timer)
@@ -133,4 +138,7 @@ function resetGame() {
     wpmValue.innerText = 0
     mistakeValue.innerText = 0
     charIndex = cpm = wpm = mistake = 0, isTyping = false
+    accuracy = 100
+    accuracyValue.innerText = `${accuracy}%`
+
 }
