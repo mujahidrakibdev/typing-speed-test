@@ -92,10 +92,11 @@ body{
     padding: .5rem;
     border-radius: 100px;
     color: white;
+    cursor: pointer;
 }
 
 .restart-button:active {
-    scale: .95;
+    scale: .95; 
 }
 
 

@@ -30,6 +30,7 @@ const timerdiv = document.querySelector(".timer")
 const wpmValue = document.querySelector(".wpm-value")
 const cpmValue = document.querySelector(".cpm-value")
 const accuracyValue = document.querySelector(".accuracy")
+const heading = document.querySelector(".heading")
 
 
 let charIndex = cpm = wpm = mistake = accuracy = 0, isTyping = false, timeLeft = 60, timer
@@ -48,6 +49,7 @@ function changeParagraph() {
         const spanTag = `<span>${letter}</span>`
         text.innerHTML += spanTag
     })
+    text.querySelectorAll("span")[0].classList.add("underline")
     
     document.addEventListener("keydown", () => inputField.focus())
     text.addEventListener("click", () => inputField.focus())
@@ -73,6 +75,7 @@ function typing() {
                     timeLeft--
                     timerdiv.innerText = `${timeLeft}s`
                 } else {
+                    heading.style = `color: #FBA518; text-shadow: 0 0 5px #2D336B;`
                     clearInterval(timer)
                 }
                 
@@ -129,7 +132,7 @@ function addUnderline(letters) {
 }
 
 function resetGame() {
-    changeParagraph()
+    loading()
     inputField.value = ""
     clearInterval(timer)
     timeLeft = 60
@@ -140,5 +143,12 @@ function resetGame() {
     charIndex = cpm = wpm = mistake = 0, isTyping = false
     accuracy = 100
     accuracyValue.innerText = `${accuracy}%`
+    heading.style = `color: #44475A; text-shadow: 0 0 5px #FEEC37;`
+}
 
+function loading() {
+    text.innerHTML = "Loading..."
+    setTimeout(() => {
+        changeParagraph()
+    }, 100);
 }
